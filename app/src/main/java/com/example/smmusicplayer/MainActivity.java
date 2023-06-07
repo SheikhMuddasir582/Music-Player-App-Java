@@ -3,9 +3,12 @@ package com.example.smmusicplayer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.karumi.dexter.Dexter;
@@ -19,6 +22,43 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_stlye, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected( MenuItem item) {
+        int id= item.getItemId();
+        if(id == R.id.settings)
+        {
+            Intent intent= new Intent(MainActivity.this, Settings.class);
+            startActivity(intent);
+            return  true;
+        }
+        else if(id == R.id.about)
+        {
+            Intent intent= new Intent(MainActivity.this, About_Us.class);
+            startActivity(intent);
+            return  true;
+        }
+        else if(id == R.id.playlist)
+        {
+            Intent intent= new Intent(MainActivity.this, MainActivity.class);
+            startActivity(intent);
+            return  true;
+        }
+        else if(id == R.id.contactUs)
+        {
+            Intent intent= new Intent(MainActivity.this, Contact_Us.class);
+            startActivity(intent);
+            return  true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .check();
+
 
     }
     public ArrayList<File> fetchSongs(File file)
